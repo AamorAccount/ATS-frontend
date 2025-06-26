@@ -13,6 +13,7 @@ import HasAccess from '../utils/accessControl';
 import { axiosInstance } from '../utils/axios';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie'
 
 export default function Navbar() {
   const navigate = useNavigate()
@@ -35,7 +36,7 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await axiosInstance.post('auth/logout');
+      Cookies.remove('token');
       window.location.href = '/login';
     } catch (err) {
       console.error('Logout failed', err);
