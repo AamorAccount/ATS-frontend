@@ -14,7 +14,10 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
+<<<<<<< HEAD
+=======
     "@mui/x-data-grid": "^8.5.0",
+>>>>>>> bc5c396bfbb0626006c84b46297d18e0b46e0618
     "axios": "^1.9.0",
     "file-saver": "^2.0.5",
     "jose": "^6.0.11",
@@ -24,10 +27,16 @@
     "jwt-decode": "^4.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+<<<<<<< HEAD
+    "react-router-dom": "^7.6.0",
+    "react-slick": "^0.30.3",
+    "slick-carousel": "^1.8.1"
+=======
     "react-router-dom": "^7.6.1",
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",
     "xlsx": "^0.18.5"
+>>>>>>> bc5c396bfbb0626006c84b46297d18e0b46e0618
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
