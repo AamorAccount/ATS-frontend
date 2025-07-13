@@ -12,7 +12,6 @@ export default function LoginCallback() {
 
 
     useEffect(() => {
-        // Extract token from query string
         const params = new URLSearchParams(location.search);
         const token = params.get('token');
 
@@ -21,14 +20,14 @@ export default function LoginCallback() {
                 const decoded = jwtDecode(token);
                 console.log("Decoded JWT:", decoded);
 
-                // Set token in cookie
+
                 Cookies.set('token', token, {
                     expires: 7,
                     sameSite: 'Strict',
                     secure: location.protocol === 'https:'
                 });
 
-                // Set user context
+
                 setUser({
                     name: decoded.FullName,
                     email: decoded.Email,
@@ -36,7 +35,7 @@ export default function LoginCallback() {
                     access: decoded.Access || []
                 });
 
-                // Navigate once context is updated
+
                 navigate('/home', { replace: true });
 
             } catch (err) {
@@ -44,7 +43,6 @@ export default function LoginCallback() {
                 navigate('/login', { replace: true });
             }
         } else {
-            // No token found
             navigate('/login', { replace: true });
         }
     }, [location, setUser, navigate]);

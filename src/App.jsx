@@ -7,13 +7,13 @@ import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 import UserContext from "./context/UserContext";
 
+
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const { setUser } = useContext(UserContext);
 
   useEffect(() => {
-    // Don't run this logic on the login callback route!
     if (location.pathname.startsWith('/callback/login')) return;
 
     const token = Cookies.get('token');
@@ -40,27 +40,33 @@ function App() {
   return (
     <div>
       <Routes>
-        {routes.map(({ path, element, requiredAccess }, index) => {
-          const hasAccess = Array.isArray(requiredAccess) && requiredAccess.length > 0;
+        {/* {routes.map(({ path, element, requiredAccess }, index) => { */}
+        {
+          routes.map(({ path, element, requiredAccess }, index) => {
+            const hasAccess = Array.isArray(requiredAccess) && requiredAccess.length > 0;
 
-          return (
-            <Route
-              key={index}
-              path={path}
-              element={
-                hasAccess ? (
-                  <ProtectedRoute
-                    requiredAccess={requiredAccess}
-                  >
-                    {element}
-                  </ProtectedRoute>
-                ) : (
-                  element
-                )
-              }
-            />
-          );
-        })}
+            return (
+              <Route
+                key={index}
+                path={path}
+                element={
+                  hasAccess ? (
+                    <ProtectedRoute
+                      requiredAccess={requiredAccess}
+                    >
+                      {
+                        element
+
+                      }
+                    </ProtectedRoute>
+                  ) : (
+                    element
+                  )
+                }
+              />
+            );
+          })
+        }
       </Routes>
     </div>
   );

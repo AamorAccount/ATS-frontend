@@ -1,35 +1,36 @@
-import { Navigate } from "react-router-dom";
+import React, { useEffect, useState, useContext } from 'react';
 import UserContext from '../context/UserContext';
-import { useContext } from "react";
-import RouteGuardContext from '../context/RouteGuardContext';
+import { getPermissions } from '../services/getPermissions';
+import { Navigate } from 'react-router-dom';
+import Loader from '../helpers/Loader';
 
-export default function ProtectedRoute({ children, requiredAccess = [], allowedPreviousPaths = [] }) {
+
+export default function ProtectedRoute({ children, requiredAccess = [] }) {
+
     const userContext = useContext(UserContext);
     const user = userContext && userContext.user ? userContext.user : userContext;
+    const userAccess = user ? user.access : [];
 
-    const routeGuard = useContext(RouteGuardContext);
-    const previousPath = routeGuard ? routeGuard.previousPath : null;
-    console.log(previousPath)
+    const [hasAccess, setHasAccess] = useState(null);
 
-    //   if (loading) return <div>Loading...</div>;
+    useEffect(() => {
+        if (!user) return;
 
-    if (!user || !user.email) {
-        return <Navigate to="/login" replace />;
+        async function checkAccess() {
+            const result = await getPermissions(requiredAccess, userAccess);
+            setHasAccess(result);
+        }
+
+        checkAccess();
+    }, [requiredAccess, user]);
+
+    if (!user || hasAccess === null) {
+        return <Loader />;
     }
 
-
-
-    const hasAccess = requiredAccess.some(tag => user.access.includes(tag));
     if (!hasAccess) {
         return <Navigate to="/unauthorized" replace />;
     }
-    // Fix: Only enforce allowedPreviousPaths if previousPath is set (not null/undefined)
-    const hasNavigationPermission =
-        allowedPreviousPaths.length === 0 ||
-        previousPath == null || // allow if previousPath is not set (e.g., on refresh)
-        allowedPreviousPaths.includes(previousPath);
-    if (!hasNavigationPermission) return <Navigate to="/upload" />;
-
 
     return children;
 }

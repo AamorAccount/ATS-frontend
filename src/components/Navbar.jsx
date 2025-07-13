@@ -1,23 +1,19 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef, useContext, useEffect } from 'react'
 import { Box, Button, Typography } from '@mui/material'
 import logo from '../assets/aapmor-logo.png'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import '../styles/navbar.css'
-import Fade from '@mui/material/Fade';
 import Logout from '@mui/icons-material/Logout';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import { IconButton, Dialog, Slide } from '@mui/material';
 import UserContext from '../context/UserContext';
-import AccessTags from '../utils/accessTags';
-import HasAccess from '../utils/accessControl';
-import { axiosInstance } from '../utils/axios';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Cookies from 'js-cookie'
+import { getPermissions } from '../services/getPermissions'
 
 export default function Navbar() {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false);
+  const [hasAdminAccess, setHasAdminAccess] = useState(false)
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const userContext = useContext(UserContext);
   const user = userContext && userContext.user ? userContext.user : userContext;
@@ -42,6 +38,16 @@ export default function Navbar() {
       console.error('Logout failed', err);
     }
   };
+  useEffect(() => {
+    async function checkPermissions() {
+      const admin = await getPermissions(['Admin View'], user.access);
+      setHasAdminAccess(admin);
+    }
+
+    if (user?.access?.length) {
+      checkPermissions();
+    }
+  }, []);
 
   return (
     <Box className='navbar'>
@@ -89,7 +95,7 @@ export default function Navbar() {
                   <Typography sx={{ color: '#333' }}>{user.name}</Typography>
                   <Typography sx={{ color: '#333' }}>{user.email}</Typography>
 
-                  {HasAccess(user, [AccessTags.ATS_PRD_ADMIN, AccessTags.ATS_PRD_USER]) && (
+                  {hasAdminAccess && (
                     <Button
                       // startIcon={<Logout />}
                       onClick={() => { navigate('/admin') }}

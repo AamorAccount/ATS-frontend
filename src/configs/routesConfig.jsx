@@ -5,7 +5,7 @@ import ResumesList from "../pages/ResumesList";
 import AdminDashboard from '../pages/AdminDashboard';
 import LoginCallback from "../pages/LoginCallback";
 import NavigatetoAuthX from "../pages/NavigateToAuthX";
-import AccessTags from '../utils/accessTags'
+
 import Unauthorized from '../pages/Unauthorized'
 import NotFound from "../pages/NotFound";
 
@@ -22,29 +22,29 @@ const routes = [
   {
     path: "/upload",
     element: <Upload />,
-    requiredAccess: [AccessTags.ATS_PRD_USER, AccessTags.ATS_PRD_ADMIN]
+    requiredAccess: ['Admin View', "User View"],
   },
   {
     path: "/resume-analyze",
     element: <ResumeAnaylze />,
-    requiredAccess: [AccessTags.ATS_DEV_USER, AccessTags.ATS_DEV_ADMIN],
+    requiredAccess: ['Admin View', "User View"],
     // allowedPreviousPaths: ["/upload", "/admin"]
   },
   {
     path: "/home",
     element: <LandingPage />,
-    requiredAccess: [AccessTags.ATS_DEV_USER, AccessTags.ATS_DEV_ADMIN]
+    requiredAccess: ['Admin View', "User View"],
   },
   {
     path: "/resumes-list",
     element: <ResumesList />,
-    requiredAccess: [AccessTags.ATS_DEV_USER, AccessTags.ATS_DEV_ADMIN],
+    requiredAccess: ['Admin View', "User View"],
     // allowedPreviousPaths: ["/upload"]
   },
   {
     path: "/admin",
     element: <AdminDashboard />,
-    requiredAccess: [AccessTags.ATS_DEV_ADMIN, AccessTags.ATS_PRD_ADMIN]
+    requiredAccess: ['Admin View'],
   },
   {
     path: "/callback/login",

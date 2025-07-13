@@ -3,14 +3,12 @@ import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 import Loader from '../helpers/Loader';
 
-// 1. Create the context
 const UserContext = createContext({
     user: { name: '', email: '', role: '', access: [] },
     setUser: () => { },
     loading: true
 });
 
-// 2. Provider component
 export function UserProvider({ children }) {
     const [user, setUser] = useState({
         name: '',
@@ -54,7 +52,7 @@ export function UserProvider({ children }) {
     );
 }
 
-// 3. Custom hook
+
 export function useUser() {
     return useContext(UserContext);
 }
