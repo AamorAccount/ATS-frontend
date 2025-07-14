@@ -5,7 +5,7 @@ import '../styles/resumeAnalysis.css'
 
 export default function ScoreCard({ title, score }) {
     return (
-        <div>
+        <div className='box-container'>
             <Box className='score-card'>
                 <Typography gutterBottom className='score-title' variant='h6' fontWeight={550} fontSize={20}
                     sx={{ color: '#333' }}

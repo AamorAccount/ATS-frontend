@@ -22,6 +22,7 @@
   align-items: center;
   margin: 2% 0;
   /* margin-right: 40px; */
+  margin-bottom: 1%;
 }
 
 .analysis-header-left {
@@ -52,9 +53,64 @@
   background-color: #ffffff;
   padding: 4%;
   border-radius: 8px;
+  width: 85%;
+  z-index: 100;
 }
 
 .score {
   color: #00c28e;
   /* border-radius: 35px; */
+}
+
+.outer-box {
+  background: #ffffff99;
+  padding: 5%;
+  height: 48vh;
+  margin-top: 2rem;
+  border-radius: 8px;
+  width: 85%;
+  z-index: 100;
+  /* display: flex; */
+  /* justify-content: center; */
+}
+
+.inner-box {
+  background-color: #fff;
+  padding: 5%;
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.box-container {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  color: #af85ff;
+}
+
+.title,
+.detail {
+  padding: 8px 0;
+}
+
+.detail {
+  color: #333;
+  border-top: 1px solid rgb(186, 183, 183);
+}
+
+.left-grid {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.right-grid {
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }

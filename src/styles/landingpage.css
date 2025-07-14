@@ -1,28 +1,30 @@
 /* Carousel.css */
 
 .full-width-carousel {
-  width: 70%;
+  width: 100%;
 }
 
 .full-width-slide {
-  width: 100vw;
-  height: 66vh;
+  width: 100%;
+  min-height: 56%;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-left: 3rem;
 }
 
 .full-width-slide img {
   max-width: 90%;
   max-height: 90%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .slide-image {
-  width: 100%;
-  height: auto;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  height: 100%;
 }
-
 
 /* Left and right boxes */
 .Right-box {
@@ -57,18 +59,10 @@
 
 /* background box css */
 .BoxOne {
-  background: radial-gradient(
-    210.08% 135.02% at 108.75% 6.07%,
-    #f8fafc 0%,
-    #d4fff3 26.96%,
-    #cddbff 51.12%,
-    #d3fff3 71.15%,
-    #fafbfd 100%
-  );
   padding: 35.5px;
-  height: 80%;
+  height: 100%;
   width: 100%;
-  margin: auto;
+  /* margin: auto; */
   position: relative;
   z-index: 1;
 }
@@ -95,4 +89,16 @@
   left: 50%;
   transform: translateX(-50%);
   /* color: rgba(0, 0, 0, 0.6) */
+}
+
+.landing-page-main {
+  background: radial-gradient(
+    210.08% 135.02% at 108.75% 6.07%,
+    #f8fafc 0%,
+    #d4fff3 26.96%,
+    #cddbff 51.12%,
+    #d3fff3 71.15%,
+    #fafbfd 100%
+  );
+  min-height: 100vh;
 }
