@@ -7,11 +7,14 @@ export async function getPermissions(requiredAccesses = [], userAccesses = []) {
     if (requiredAccesses.length === 0) {
       return false;
     }
-    const response = await axios.get(import.meta.env.VITE_PERMISSIONS_URL, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.get(
+      import.meta.env.VITE_PERMISSIONS_URL + "/api/v1/project_permissions/ATS",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     // console.log(response.data);
 
     let hasPerm = false;
