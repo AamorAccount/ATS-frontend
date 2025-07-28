@@ -69,11 +69,11 @@ const ResumeResults = () => {
   useEffect(() => {
     setRows(
       data_array
-        .filter((data) => data.data && data.data.email && data.data.email !== 'unknown')
+        // .filter((data) => data.data && data.data.email && data.data.email !== 'unknown')
         .map((data, index) => {
-          // console.log(data.data.email);
+          console.log(data.data.email);
           return {
-            id: data.data?._id || null,
+            id: data.data?._id || index + 1,
             sl: index + 1,
             score: `${data.data?.ats_score}%`,
             name: data.data?.candidate_name,
