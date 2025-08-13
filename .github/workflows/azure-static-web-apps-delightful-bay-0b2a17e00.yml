@@ -19,6 +19,25 @@ jobs:
         with:
           submodules: true
           lfs: false
+
+      # ✅ Use Node.js 20.x
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # ✅ Install dependencies cleanly
+      - name: Install dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm cache clean --force
+          npm ci
+
+      # ✅ Build the app
+      - name: Build app
+        run: npm run build
+
+      # ✅ Deploy to Azure Static Web App
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
