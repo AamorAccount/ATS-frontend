@@ -27,12 +27,13 @@ jobs:
           node-version: 20
 
       # ✅ Install and build the app manually
-      - name: Install and Build
+      - name: Install dependencies
         run: |
-          rm -rf node_modules
+          rm -rf node_modules package-lock.json
           npm cache clean --force
           npm install
-          npm run build
+          npm install rollup --force
+
 
       # ✅ Deploy built files only (skip Azure build step)
       - name: Deploy
@@ -55,3 +56,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_BAY_0B2A17E00 }}
           action: "close"
+
