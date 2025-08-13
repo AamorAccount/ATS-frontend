@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: 20
 
-      # ✅ Install and build the app manually
+      # ✅ Install dependencies cleanly
       - name: Install dependencies
         run: |
           rm -rf node_modules package-lock.json
@@ -34,20 +34,20 @@ jobs:
           npm install
           npm install rollup --force
 
-
+      # ✅ Build the app before deployment
       - name: Build app
         run: npm run build
 
+      # ✅ Deploy only the built dist folder
       - name: Deploy to Azure Static Web App
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_BAY_0B2A17E00 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/" # Source code path
-          output_location: "dist" # ✅ Use dist for Vite builds
-          skip_app_build: true
-
+          app_location: "/"       # Path to package.json (source)
+          output_location: "dist" # Path to build output
+          skip_app_build: false   # ❌ Let Azure pick up dist only, not whole repo
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -60,5 +60,3 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_BAY_0B2A17E00 }}
           action: "close"
-
-
